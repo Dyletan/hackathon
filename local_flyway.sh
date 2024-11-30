@@ -1,8 +1,11 @@
 #!/bin/bash
-cd terraform
-terraform init
+docker clean running_devopsina
+docker rm running_devopsina
 
-terraform apply
+cd terraform
+terraform init 
+
+terraform apply --auto-approve
 
 FLYWAY_IMAGE="flyway/flyway:11.0"
 FLYWAY_CONF_DIR="$(pwd)/flyway/conf"
