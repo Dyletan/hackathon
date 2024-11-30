@@ -1,4 +1,8 @@
 #!/bin/bash
+cd terraform
+terraform init
+
+terraform apply
 
 FLYWAY_IMAGE="flyway/flyway:11.0"
 FLYWAY_CONF_DIR="$(pwd)/flyway/conf"
