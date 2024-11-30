@@ -33,6 +33,10 @@ resource "docker_image" "kbtu_image_to_pull" {
   keep_locally = true
 }
 
+resource "docker_volume" "shared_volume" {
+  name = "psql_data"
+}
+
 resource "docker_container" "kbtu_image_iwant_to_start" {
   image = docker_image.kbtu_image_to_pull.image_id
   name  = "running_devopsina"
@@ -42,11 +46,19 @@ resource "docker_container" "kbtu_image_iwant_to_start" {
     external = 5434
   }
 
+  mounts {
+    target = "/var/lib/postgresql/data"
+    source = docker_volume.shared_volume.name
+    type   = "volume"
+  }
+
   env = [
     "POSTGRES_USER=${var.db_user}",
     "POSTGRES_PASSWORD=${var.db_password}",
     "POSTGRES_DB=${var.db_name}"
   ]
+
+
 }
 
 output "container_name" {
@@ -55,4 +67,8 @@ output "container_name" {
 
 output "container_ports" {
   value = docker_container.kbtu_image_iwant_to_start.ports.0.external
+}
+
+output "volume_name" {
+  value = docker_volume.shared_volume.name
 }
