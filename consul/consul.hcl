@@ -1,16 +1,11 @@
-data_dir = "/opt/consul"
-bind_addr = "0.0.0.0"
-
-server {
-  bootstrap_expect = 1
-}
-
-client {
+datacenter = "dc1"
+data_dir = "/consul/data"
+client_addr = "0.0.0.0"
+ui_config{
   enabled = true
 }
 
-dns_config {
-  recursor_timeout = "5s"
-  enable_truncate = true
-}
-domain = "kbtu.nb"
+alt_domain = "kbtu.nb"
+
+server = true
+bootstrap_expect = 1
