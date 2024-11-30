@@ -2,7 +2,17 @@
 TRUNCATE TABLE enrollments RESTART IDENTITY CASCADE; 
 TRUNCATE TABLE courses RESTART IDENTITY CASCADE; 
 TRUNCATE TABLE students RESTART IDENTITY CASCADE; 
- 
+
+-- Savoskin said that delete is preferd, but need to test
+-- DELETE FROM enrollments;
+-- DELETE FROM courses;
+-- DELETE FROM students;
+
+-- -- Reset sequences for auto-increment fields
+-- ALTER SEQUENCE students_id_seq RESTART WITH 1;
+-- ALTER SEQUENCE courses_id_seq RESTART WITH 1;
+-- ALTER SEQUENCE enrollments_id_seq RESTART WITH 1;
+
 -- Insert sample data 
 INSERT INTO students (name, age) VALUES 
     ('Alice Johnson', 20), 
