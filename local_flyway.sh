@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# FLYWAY_IMAGE="flyway/flyway:11.0"
-
-# # Run Flyway migrations
-# echo "Running Flyway migrations..."
-# docker run --rm \
-#   -v $(pwd)/flyway/conf:/flyway/conf \
-#   -v $(pwd)/flyway/sql:/flyway/sql \
-#   $FLYWAY_IMAGE -configFiles=conf/flyway.conf migrate
-
-#!/bin/bash
-
 FLYWAY_IMAGE="flyway/flyway:11.0"
 FLYWAY_CONF_DIR="$(pwd)/flyway/conf"
 FLYWAY_SQL_DIR="$(pwd)/flyway/sql"
@@ -42,7 +31,6 @@ cat <<EOF > "$FLYWAY_CONF_FILE"
 flyway.url=$url
 flyway.user=$user
 flyway.password=$password
-flyway.locations=filesystem:/flyway/sql
 EOF
 
 echo "Flyway configuration file created at $FLYWAY_CONF_FILE"
@@ -53,3 +41,13 @@ docker run --rm \
   -v "$FLYWAY_CONF_DIR:/flyway/conf" \
   -v "$FLYWAY_SQL_DIR:/flyway/sql" \
   $FLYWAY_IMAGE -configFiles=/flyway/conf/flyway.conf migrate
+
+
+# FLYWAY_IMAGE="flyway/flyway:11.0"
+
+# # Run Flyway migrations
+# echo "Running Flyway migrations..."
+# docker run --rm \
+#   -v $(pwd)/flyway/conf:/flyway/conf \
+#   -v $(pwd)/flyway/sql:/flyway/sql \
+#   $FLYWAY_IMAGE -configFiles=conf/flyway.conf migrate
