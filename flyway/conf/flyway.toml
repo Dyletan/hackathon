@@ -1,4 +1,0 @@
-flyway.url=jdbc:postgresql://host.docker.internal:5434/postgres
-flyway.user=postgres
-flyway.password=postgres
-flyway.schemas=public
